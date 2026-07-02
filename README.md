@@ -2,7 +2,7 @@
 
 > **Beyond the Chatbot — A visual AI-native workspace for orchestrating agents, tools, and workflows.**
 
-[![CI](https://github.com/YOUR_USERNAME/ai-canvas-os/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/ai-canvas-os/actions/workflows/ci.yml)
+[![CI](https://github.com/hafirhalima00-coder/ai-canvas-os/actions/workflows/ci.yml/badge.svg)](https://github.com/hafirhalima00-coder/ai-canvas-os/actions/workflows/ci.yml)
 [![Live Demo](https://img.shields.io/badge/demo-vercel-blue)](https://ai-canvas-os.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
@@ -136,7 +136,7 @@ User Drags Block → BlockPalette → Canvas Store (Zustand)
 ### Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-canvas-os.git
+git clone https://github.com/hafirhalima00-coder/ai-canvas-os.git
 cd ai-canvas-os
 npm install
 npm run dev
@@ -252,7 +252,7 @@ npm run build           # Type-check + production build
 
 ### Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/ai-canvas-os)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/hafirhalima00-coder/ai-canvas-os)
 
 ```bash
 npm run build
@@ -293,7 +293,7 @@ The multi-stage `Dockerfile` produces a minimal production image (~120 MB) using
 
 ## 📄 License
 
-MIT © [Your Name]
+MIT © hafirhalima00-coder
 
 ---
 
