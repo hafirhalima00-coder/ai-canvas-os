@@ -3,7 +3,7 @@
 > **Beyond the Chatbot — A visual AI-native workspace for orchestrating agents, tools, and workflows.**
 
 <p align="center">
-  <video src="public/demo.mp4" controls width="100%" style="max-width: 720px; border-radius: 12px;"></video>
+  <video src="https://raw.githubusercontent.com/hafirhalima00-coder/ai-canvas-os/master/public/demo.mp4" controls width="100%" style="max-width: 720px; border-radius: 12px;"></video>
 </p>
 
 [![CI](https://github.com/hafirhalima00-coder/ai-canvas-os/actions/workflows/ci.yml/badge.svg)](https://github.com/hafirhalima00-coder/ai-canvas-os/actions/workflows/ci.yml)
