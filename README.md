@@ -2,7 +2,7 @@
 
 > **Beyond the Chatbot — A visual AI-native workspace for orchestrating agents, tools, and workflows.**
 
-<video src="https://github.com/hafirhalima00-coder/ai-canvas-os/raw/master/public/demo.mp4" controls width="100%" style="max-width: 720px; border-radius: 12px;"></video>
+[![Watch Demo Video](public/thumbnail.png)](public/demo.mp4)
 
 [![CI](https://github.com/hafirhalima00-coder/ai-canvas-os/actions/workflows/ci.yml/badge.svg)](https://github.com/hafirhalima00-coder/ai-canvas-os/actions/workflows/ci.yml)
 [![Live Demo](https://img.shields.io/badge/demo-vercel-blue)](https://ai-canvas-os.vercel.app)
