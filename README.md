@@ -308,3 +308,8 @@ MIT © hafirhalima00-coder
 - [next-themes](https://github.com/pacocoursey/next-themes) — Theme switching
 - [Vitest](https://vitest.dev) — Unit testing
 - [Ollama](https://ollama.ai) — Local AI execution
+
+---
+
+> **built by Halima Hafir**
+
