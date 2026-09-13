@@ -25,6 +25,7 @@ import { useWorkflowStore } from "@/lib/stores/workflow-store";
 import { generateId } from "@/lib/utils";
 import type { AIBlock, BlockType, WorkflowEdge } from "@/lib/types";
 import { BLOCK_REGISTRY } from "@/lib/types";
+import IntentBar from "@/components/canvas/IntentBar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -333,6 +334,7 @@ function CanvasInner() {
 
   return (
     <div className="relative w-full h-full flex flex-col bg-background">
+      <IntentBar />
       <div className="flex items-center gap-2 px-4 py-2 border-b bg-card/80 backdrop-blur-xl supports-[backdrop-filter]:bg-card/60 z-10">
         <input
           value={workflowName}

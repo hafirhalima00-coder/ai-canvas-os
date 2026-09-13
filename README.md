@@ -48,15 +48,102 @@ Traditional dashboards are passive. Chatbots are isolated. **AI Canvas OS** intr
 
 ---
 
-## 🏗️ Architecture
+## 🎯 What This Replaces
+
+### The Chat Problem
+Traditional AI interfaces make you describe every step:
+```
+You: "Send a follow-up email to our enterprise leads"
+Bot: "Sure! Here's a template..."
+You: "Can you personalize it for each segment?"
+Bot: "Of course! Here's the personalized version..."
+You: "Now schedule it for Tuesday"
+Bot: "Done! Here's the confirmation..."
+[5 messages. 3 tool calls. You drive every step.]
+```
+
+### The Dashboard Problem
+Traditional dashboards show you everything but tell you nothing:
+```
+[50 metrics] [12 charts] [3 reports] [8 notifications]
+"Ask AI" button in the corner
+[Passive. No action. You interpret everything.]
+```
+
+### The AI Canvas OS Solution
+The visual intent engine drives. You review:
+```
+CRM → Research → Analyst → Writer → [Approve?] → Email
+                         ↑
+              "AI suggests: personalize for 12 enterprise contacts"
+              [Execute] [Override] [Skip]
+[3 blocks. Self-driving. AI infers the next step.]
+```
+
+---
+
+## 🏗️ Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    AI CANVAS OS                              │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  ┌──────────┐    ┌──────────────┐    ┌────────────────┐    │
+│  │   DATA   │───→│    INTENT    │───→│    DECISION    │    │
+│  │  (CRM,   │    │  INFERENCE   │    │   (Human in    │    │
+│  │  Research)│    │  (Ollama /   │    │    the Loop)   │    │
+│  └──────────┘    │  Fallback)   │    └───────┬────────┘    │
+│                  └──────────────┘            │              │
+│                                              ↓              │
+│  ┌──────────────────────────────────────────────────┐      │
+│  │                   ACTION                          │      │
+│  │  Email Send · Code Deploy · Report Generation     │      │
+│  └──────────────────────────────────────────────────┘      │
+│                                                             │
+├─────────────────────────────────────────────────────────────┤
+│  FAILURE RECOVERY: Retry → Skip → Substitute → Abort        │
+│  Recovery confidence scores: 82% / 65% / 58% / 95%         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Data Flow:**
+```
+CRM pulls leads → AI researches companies → Analyst scores segments
+    → Writer personalizes emails → Human approves → System sends
+    → Analytics tracks performance
+```
+
+---
+
+## 📝 Thesis: Post-Chatbot AI Interfaces
+
+> **Chat is a fallback when the system doesn't know what you need.**
+
+The chatbot was the training wheels. The dashboard was the crutch. The intent engine is the future.
+
+By 2027, AI interfaces will be visual intent engines:
+1. **Data layer** connects to your tools (CRM, email, code, docs)
+2. **Intent inference** observes patterns and predicts what you need
+3. **Decision surface** shows you only the next choice to make
+4. **Autonomous action** executes with human review at critical points
+
+Chat survives as a power-user escape hatch. Dashboards survive as monitoring tools. But the primary interface for AI-native work is a visual workspace where the system drives and the human reviews.
+
+**Read the full thesis:** [docs/THESIS.md](docs/THESIS.md)
+
+---
+
+## 🏗️ Code Architecture
 
 ```
 src/
 ├── app/                          # Next.js App Router pages
 │   ├── layout.tsx                # Root layout with ThemeProvider + Navbar
-│   ├── page.tsx                  # Landing page with hero + feature cards
+│   ├── page.tsx                  # Landing page: comparison + thesis + CTA
 │   ├── canvas/page.tsx           # Infinite canvas workspace
-│   └── dashboard/page.tsx        # Analytics dashboard
+│   ├── dashboard/page.tsx        # Analytics dashboard
+│   └── api/ollama/route.ts       # Ollama intent inference API
 ├── components/
 │   ├── blocks/                   # AI block node components
 │   │   ├── AIBlockNode.tsx       # React Flow custom node (8 types)
@@ -64,31 +151,25 @@ src/
 │   ├── canvas/                   # Canvas components
 │   │   ├── Canvas.tsx            # Main React Flow canvas (DnD, toolbar)
 │   │   ├── BlockPalette.tsx      # Searchable block library (4 categories)
-│   │   └── CommandPalette.tsx    # Ctrl+K command palette (14 commands)
-│   ├── dashboard/                # Dashboard widgets (stats, history, timeline)
-│   ├── layout/                   # UI shell components
-│   │   ├── Navbar.tsx            # Top navigation bar
-│   │   ├── CollapsibleSidebar.tsx# Resizable block palette sidebar
-│   │   └── ThemeProvider.tsx     # next-themes wrapper (dark default)
-│   ├── panels/                   # Side panels
-│   │   ├── MemoryPanel.tsx       # Context / Variables / Documents tabs
-│   │   ├── NotificationCenter.tsx# Bell dropdown with read/unread
-│   │   ├── VersionHistory.tsx    # Snapshot create, restore, delete
-│   │   └── WorkflowTemplates.tsx # Template browser (4 templates)
+│   │   ├── CommandPalette.tsx    # Ctrl+K command palette (20+ commands)
+│   │   ├── IntentBar.tsx         # AI intent inference bar (competition)
+│   │   └── FailureTest.tsx       # Failure recovery demo (competition)
+│   ├── dashboard/                # Dashboard widgets
+│   ├── layout/                   # Navbar, sidebar, ThemeProvider
+│   ├── panels/                   # Memory, Notifications, Version History
 │   └── ui/                       # 16 shadcn/ui primitives
-│       ├── avatar, badge, button, card, dialog, dropdown-menu
-│       ├── input, label, scroll-area, select, separator
-│       ├── switch, tabs, textarea, toast, tooltip
 ├── lib/
-│   ├── services/                 # Business logic services
-│   │   ├── workflow-engine.ts    # Topological sort + block executors
-│   │   ├── version-history.ts    # Snapshot CRUD (localStorage)
-│   │   └── analytics.ts          # Run analytics (localStorage)
-│   ├── stores/                   # Zustand state management (5 stores)
-│   │   ├── canvas-store.ts       # Blocks, edges, selection, snapshots
-│   │   ├── workflow-store.ts     # Execution state + analytics store
-│   │   ├── memory-store.ts       # Memory panel (3 seeded items)
-│   │   ├── notification-store.ts # Notification queue (max 50)
+│   ├── services/                 # Business logic
+│   │   ├── workflow-engine.ts    # Realistic block executors + topological sort
+│   │   ├── intent-engine.ts      # Client-side intent inference service
+│   │   ├── version-history.ts    # Snapshot CRUD
+│   │   └── analytics.ts          # Run analytics
+│   ├── stores/                   # Zustand state (5 stores)
+│   └── types.ts                  # TypeScript types
+├── __tests__/                    # Vitest unit tests
+docs/
+├── THESIS.md                     # Competition thesis
+```
 │   │   └── template-store.ts     # 4 pre-seeded workflow templates
 │   ├── types.ts                  # All TypeScript types + BLOCK_REGISTRY
 │   └── utils.ts                  # cn(), generateId(), formatDuration(), etc.
